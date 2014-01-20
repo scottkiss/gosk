@@ -1,0 +1,20 @@
+title: blog title
+subtitle: subtitle
+link: blog URL
+meta:
+  description: meta's description
+  keywords: keyword,more keyword
+  author: meta's author or article's author
+copyright:
+  owner: owner of copyright
+  beginYear: 2014
+  endYear: 2015
+  ICP: icp(for china)
+theme: default-zh
+codetheme: night
+rss:
+  title: RSS title
+  desc: RSS description
+  lang: zh-cn
+  max: 8
+duoshuoShortname: your account

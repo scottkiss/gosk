@@ -1,0 +1,7 @@
+- label: About
+  href: /pages/about.html
+  target: _self
+
+- label: github
+  href: https://github.com/scottkiss/gosk
+  target: _blank
