@@ -2,7 +2,7 @@ package main
 
 import (
 	"bufio"
-	"gosk"
+	"github.com/scottkiss/gosk"
 	"io"
 	"io/ioutil"
 	"log"
@@ -31,7 +31,7 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println("blog处理成功！")
+	log.Println("blog process ok！")
 	rd := bufio.NewReader(os.Stdin)
 	rd.ReadLine()
 
