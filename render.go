@@ -288,7 +288,13 @@ func (self *RenderFactory) RenderPosts(root string, yamls map[string]interface{}
 			fi.Link = p + trName + ".html"
 			//if abstract is empty,auto gen it
 			if fi.Abstract == "" {
-				abstract := subStr(htmlStr, 0, 500)
+				var limit int = 500
+				rs := []rune(htmlStr)
+				if len(rs) < 500 {
+					limit = len(rs)
+				}
+
+				abstract := subStr(htmlStr, 0, limit)
 				fi.Abstract = trimHTML(abstract)
 			}
 			if fi.Author == "" {

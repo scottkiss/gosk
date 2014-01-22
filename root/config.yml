@@ -10,7 +10,7 @@ copyright:
   beginYear: 2014
   endYear: 2015
   ICP: icp(for china)
-theme: default-zh
+theme: default
 codetheme: night
 rss:
   title: RSS title
@@ -18,3 +18,4 @@ rss:
   lang: zh-cn
   max: 8
 duoshuoShortname: your account
+disqus_shortname: your disqus_shortname

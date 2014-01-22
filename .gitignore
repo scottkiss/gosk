@@ -1,0 +1,5 @@
+# Compiled source #
+###################
+*.exe
+# Generated files #
+/root/publish/

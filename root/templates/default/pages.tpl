@@ -8,7 +8,7 @@
 		{{range .nav}}
 		<li><a href="{{.Href}}" target="{{.Target}}" >{{.Name}}</a></li>
 		{{end}}
-		<li><a href="/rss.xml" class="rss" title="sub"></a></li>
+		<li><a href="/rss.xml" class="rss" title="feed"></a></li>
 	</ul>
 </div>
 <div style="clear:both;"></div>
