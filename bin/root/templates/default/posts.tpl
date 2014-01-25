@@ -26,7 +26,9 @@
 		  {{end}}
 		  </div>
 		 <div id="article-content"> {{.Content|unescaped}} </div>
-		 <hr/>
+		<hr/>
+	<div class="comments">
+	 <h3>Comments</h3>
 		<div id="disqus_thread"></div>
     		<script type="text/javascript">
         	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -42,29 +44,7 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
-
 	</div>
-	
-	<div class="comments">
-	<hr>
-    <!-- duoshuo div -->
-	<div class="well">  
-	<div class="ds-thread"></div></div><br/>
-	<!-- Duoshuo Comment BEGIN -->
-	<script type="text/javascript">  
-	var duoshuoQuery = {short_name:"{{"duoshuoShortname"|get}}"};  
-	(function() {    
-	var ds = document.createElement('script');    
-	ds.type = 'text/javascript';
-	ds.async = true;    
-	ds.src = 'http://static.duoshuo.com/embed.js';    
-	ds.charset = 'UTF-8';    
-	(document.getElementsByTagName('head')[0]||
- 	document.getElementsByTagName('body')[0]).appendChild(ds); 
-	})(); 
- </script>
- <!-- Duoshuo Comment END -->
-</div>
 </div>
 
 </div>
