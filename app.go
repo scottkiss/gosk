@@ -20,8 +20,8 @@ func Run(addr string) {
 
 func Build() {
 	//publish
-	if !isExists(RENDER_DIR + "/" + PUBLICSH_DIR) {
-		err := os.Mkdir(RENDER_DIR+"/"+PUBLICSH_DIR, 0777)
+	if !isExists(PUBLICSH_DIR) {
+		err := os.Mkdir(PUBLICSH_DIR, 0777)
 		if err != nil {
 			log.Panic("create publish dir error -- " + err.Error())
 		}
