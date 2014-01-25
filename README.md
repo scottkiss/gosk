@@ -128,6 +128,9 @@ bin
  | - gosk                    #gosk  执行文件
 ```
 
+## 使用gosk的站点
+[酷酷时空](http://www.cocosk.com/)
+
 
 ## License
 View the [LICENSE](https://github.com/scottkiss/gosk/blob/master/LICENSE) file
