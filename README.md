@@ -107,25 +107,25 @@ $ ./gosk run :80
 ## 项目目录结构
 ```bash
 bin
- | - publish	             #published folder,include compiled .html files
- 	  | - ...	             #assets 
- 	  | - index.html
+ | - publish	             #执行编译后生成的目录，静态站点根目录
+ 	  | - ...	             #资源，如javascript和css 
+ 	  | - index.html         #生成的首页文件
  	  | - rss.xml
- 	  | - ...                #more html files
- | - root					 #root folder
-      | - assets             #assets folder,include javascript and css files
-      | - pages              #custom pages folder
-      | - posts              #post folder
-      	   | - article1.md   #metadata text file
-      	   | - article2.md   #metadata text file
-      | - templates          #template folder
-           | - default       #default theme template
-           | - default-zh    #default-zh theme template
-           | - ...		     #more themes template
-      | - config.yml         #site global configure
-      | - nav.yml            #navbar configure
-      | - pages.yml          #custom site configure
- | - gosk                    #gosk  file
+ 	  | - ...                #更多html文件
+ | - root					 #根目录，存放待编译的模板文件等
+      | - assets             #资源目录,包括javascript 和 css 文件
+      | - pages              #自定义页面目录
+      | - posts              #发布的文章目录
+      	   | - article1.md   #markdown编写的元文本文件
+      	   | - article2.md   #markdown编写的元文本文件
+      | - templates          #模板目录
+           | - default       #默认主题模版
+           | - default-zh    #默认中文主题模版
+           | - ...		     #更多模版主题
+      | - config.yml         #站点全局配置文件
+      | - nav.yml            #站点导航栏配置文件
+      | - pages.yml          #自定义页面配置文件
+ | - gosk                    #gosk  执行文件
 ```
 
 
