@@ -134,10 +134,9 @@ func (self *RenderFactory) RenderIndex(root string, yamls map[string]interface{}
 
 	yCfg := yamls["config.yml"]
 	var cfg = yCfg.(*yaml.File)
-	//log.Println(cfg.Get("title"))
 	t := parseTemplate(root, INDEX_TPL, cfg)
 
-	targetFile := root + PUBLICSH_DIR + "/index.html"
+	targetFile := PUBLICSH_DIR + "/index.html"
 	fout, err := os.Create(targetFile)
 	if err != nil {
 		log.Println("create file " + targetFile + " error!")
@@ -159,7 +158,7 @@ func (self *RenderFactory) RenderTag(root string, yamls map[string]interface{}) 
 	var cfg = yCfg.(*yaml.File)
 
 	t := parseTemplate(root, TAG_TPL, cfg)
-	targetFile := root + PUBLICSH_DIR + "/tag.html"
+	targetFile := PUBLICSH_DIR + "/tag.html"
 	fout, err := os.Create(targetFile)
 	if err != nil {
 		log.Println("create file " + targetFile + " error!")
@@ -184,7 +183,7 @@ func (self *RenderFactory) RenderCategories(root string, yamls map[string]interf
 	var cfg = yCfg.(*yaml.File)
 
 	t := parseTemplate(root, CATEGORY_TPL, cfg)
-	targetFile := root + PUBLICSH_DIR + "/category.html"
+	targetFile := PUBLICSH_DIR + "/category.html"
 	fout, err := os.Create(targetFile)
 	if err != nil {
 		log.Println("create file " + targetFile + " error!")
@@ -207,7 +206,7 @@ func (self *RenderFactory) RenderRss(root string, yamls map[string]interface{}) 
 	yCfg := yamls["config.yml"]
 	var cfg = yCfg.(*yaml.File)
 	t := parseXMLTemplate(root, RSS_TPL, cfg)
-	targetFile := root + PUBLICSH_DIR + "/rss.xml"
+	targetFile := PUBLICSH_DIR + "/rss.xml"
 	fout, err := os.Create(targetFile)
 	if err != nil {
 		log.Println("create file " + targetFile + " error!")
@@ -267,10 +266,10 @@ func (self *RenderFactory) RenderPosts(root string, yamls map[string]interface{}
 			//process url path => /articles/yyyy/MM/dd/{filename}.html
 			p := processArticleUrl(fi)
 			//create dir /yyyy/MM/dd
-			if !isExists(root + PUBLICSH_DIR + "/articles/" + p) {
-				os.MkdirAll(root+PUBLICSH_DIR+"/articles/"+p, 0777)
+			if !isExists(PUBLICSH_DIR + "/articles/" + p) {
+				os.MkdirAll(PUBLICSH_DIR+"/articles/"+p, 0777)
 			}
-			targetFile := root + PUBLICSH_DIR + "/articles/" + p + "/" + trName + ".html"
+			targetFile := PUBLICSH_DIR + "/articles/" + p + "/" + trName + ".html"
 			fout, err := os.Create(targetFile)
 			if err != nil {
 				log.Println("create file " + targetFile + " error!")
@@ -367,10 +366,10 @@ func (self *RenderFactory) RenderPages(root string, yamls map[string]interface{}
 		htmlStr = strings.Replace(htmlStr, "<pre><code", `<pre class="prettyprint linenums"`, -1)
 		htmlStr = strings.Replace(htmlStr, `</code>`, "", -1)
 		p.Content = htmlStr
-		if !isExists(root + PUBLICSH_DIR + "/pages/") {
-			os.MkdirAll(root+PUBLICSH_DIR+"/pages/", 0777)
+		if !isExists(PUBLICSH_DIR + "/pages/") {
+			os.MkdirAll(PUBLICSH_DIR+"/pages/", 0777)
 		}
-		targetFile := root + PUBLICSH_DIR + "/pages/" + p.Id + ".html"
+		targetFile := PUBLICSH_DIR + "/pages/" + p.Id + ".html"
 		fout, err := os.Create(targetFile)
 		if err != nil {
 			log.Println("create file " + targetFile + " error!")
@@ -394,7 +393,7 @@ func (self *RenderFactory) RenderArchives(root string, yamls map[string]interfac
 	var cfg = yCfg.(*yaml.File)
 
 	t := parseTemplate(root, ARCHIVE_TPL, cfg)
-	targetFile := root + PUBLICSH_DIR + "/archive.html"
+	targetFile := PUBLICSH_DIR + "/archive.html"
 	fout, err := os.Create(targetFile)
 	if err != nil {
 		log.Println("create file " + targetFile + " error!")

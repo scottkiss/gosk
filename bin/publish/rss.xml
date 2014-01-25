@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>RSS title</title>
+        <link>blog URL</link>
+        <description>RSS description</description>
+        <lastBuildDate>Sat, 25 Jan 2014 14:13:55 &#43;0800</lastBuildDate>
+        <language>zh-cn</language>
+       
+        <item>
+            <title>one more</title>
+            <link>2014/1/20/worl.html</link>
+            <author>meta&#39;s author or article&#39;s author</author>
+            <pubDate>2014-01-20 20:12:00</pubDate>
+            <description>&lt;h2&gt;aaa&lt;/h2&gt;
+
+&lt;p&gt;this is code：&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint linenums&#34;&gt;func main(){
+    fmt.Println(&#34;hello gosk&#34;)
+}
+&lt;/pre&gt;
+
+&lt;p&gt;aaaaa&lt;/p&gt;
+</description>
+        </item>
+       
+        <item>
+            <title>hello title</title>
+            <link>2013/5/4/hello.html</link>
+            <author>meta&#39;s author or article&#39;s author</author>
+            <pubDate>2013-05-04 18:52:00</pubDate>
+            <description>&lt;h2&gt;一、aaaa&lt;/h2&gt;
+
+&lt;p&gt;some more more&lt;/p&gt;
+
+&lt;h2&gt;二、bbb&lt;/h2&gt;
+
+&lt;p&gt;aaa&lt;/p&gt;
+</description>
+        </item>
+       
+    </channel>
+</rss>

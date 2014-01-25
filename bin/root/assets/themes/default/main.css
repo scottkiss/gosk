@@ -1,0 +1,236 @@
+body {
+    background: none repeat scroll 0 0 #EAEAEA;
+    font-family: Helvetica,arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #4183C4;
+    text-decoration: none;
+}
+#header{
+    background: none repeat scroll 0 0 #6D3353;
+    border-bottom: 1px solid #555555;
+    padding: 40px 0;
+    margin-top: 40px;
+}
+#header-inner {    
+    width: 90%;    
+    margin: 0 auto;    
+    padding-top: 2px;
+}
+#title a {    
+    font-weight: bold;    
+    font-size: 60px;    
+    color: #FFFFFF;
+    margin: 10px,0
+    }
+#subtitle {    
+    color: #FFFFFF;    
+    font-weight: bold;   
+    font-size: 24px;
+    color: #FFFFFF;
+    margin: 10px,0
+}
+
+.prettyprint {
+    font-size: 12px;
+}
+.top-nav{
+    background: none repeat scroll 0 0 #1B1B1B;
+    border-bottom: 1px solid #555555;
+    height: 40px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 99;
+    padding: 0 3%;
+}
+.top-nav a{
+    color: #999999;
+    line-height: 40px;
+}
+.top-nav a:hover{
+    color: #FFFFFF;
+}
+.top-nav a.on-sel{
+    color: #FFFFFF;
+}
+.top-nav ul {    
+    margin: 0;    
+    padding: 0;
+  
+}
+.top-nav ul li {    
+    list-style: none;    
+    float: left;
+    margin: 0 12px;
+}
+
+.top-nav ul li a {    
+    display: block;
+    font-size: 16px;
+}
+
+.top-nav ul li.sep {    
+    color: #CCCCCC;    
+   
+}
+
+.main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 10px;
+    margin: 0 3%;
+    margin-top: 40px;
+   
+}
+.main-inner {    
+    margin: 0 auto;
+    margin-top: 40px;
+    min-height: 300px;
+    padding: 0 30px;
+    padding-bottom: 30px;
+    
+ }
+
+ .article .meta {    
+    color: #999999;    
+    padding: 6px 0;
+    text-align: right;    
+}
+.article .title{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+ .article .tag {    
+    margin-right: 6px;    
+    background-color: #AAAAAA;    
+    color: #FFFFFF;    
+    padding: 3px;    
+    font-size: 14px;
+}
+
+
+
+p {
+    line-height: 26px;
+    margin-bottom: 10px;
+}
+
+
+#footer-inner {    
+    margin: 0,auto;
+    margin-top: 50px;
+    width: 100%;
+    background: none repeat scroll 0 0 #ECEBE6;
+    text-transform: uppercase;
+   
+ }
+#footer-inner p {    
+    margin-top: 80px;
+    padding-bottom: 20px;
+    text-align: center;
+    color: #666666;
+    font-size: 12px;
+    text-transform: none;
+ }
+
+
+.main .main-inner #article-title{
+    font-size: 28px;
+}
+
+
+#article-title {    
+    margin: 18px 0;    
+    font-size: 30px;    
+    font-weight: bold;    
+    border-left: 6px solid #CCCCCC;    
+    padding-left: 12px;
+}
+#article-title a {    
+    color: #333333;
+}
+ #article-content p.picture {    
+    text-align: center;
+ }
+#article-content h1 {    
+    background-color: #999999;    
+    color: #FFFFFF;    
+    padding: 2px;
+ }
+#article-content h2 {    
+    border-bottom: 1px dashed #666666;
+ }
+#article-content blockquote {   
+    margin-left: 5px;    
+    padding-left: 30px;    
+    border-left: 5px solid #0099CC;    
+    font-size: 14px;
+}
+#article-meta {    
+    color: #0099CC;    
+    padding: 6px 0;
+}
+
+#article-tags {    
+    margin-top: 6px;
+}
+
+#article-tags a.tag {   
+     margin-right: 6px;    
+     background-color: #999999;    
+     color: #FFFFFF;    
+     padding: 3px;    
+     font-size: 14px;
+ }
+
+#tags-main {    
+    border: 1px dashed #CCCCCC;    
+    background-color: #F0F0F0;
+    margin: 20px 0; 
+}
+#tags-main a {   
+     margin: 6px;    
+     display: block;    
+     float: left;    
+     font-size: 16px;
+     background-color: #FFFFFF;    
+     color: #0099CC;    
+     padding: 3px;    
+}
+#tags-main a .count {    
+    font-size: 14px;
+    color: #FFCC00;    
+ }
+#tag-index h1 {    
+    border-bottom: 1px dashed #CCCCCC;
+ }
+#tag-index h1 a {    
+    color: #666666;    
+    font-size: 24px;
+ }
+.comments {
+    padding: 0 30px;
+}
+
+hr {
+    background: url("ds.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    color: #CCCCCC;
+    height: 4px;
+    padding: 0;
+}
+
+.rss{
+    background: url("rss.png");
+    width: 16px;
+    height: 16px;
+    margin-top: 12px;
+
+}

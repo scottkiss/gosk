@@ -2,4 +2,4 @@
 ###################
 *.exe
 # Generated files #
-/root/publish/
+/publish/

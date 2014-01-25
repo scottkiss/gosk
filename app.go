@@ -1,8 +1,7 @@
-package main
+package gosk
 
 import (
-	"bufio"
-	"github.com/scottkiss/gosk"
+	"github.com/scottkiss/gostas"
 	"io"
 	"io/ioutil"
 	"log"
@@ -10,11 +9,16 @@ import (
 )
 
 const (
-	RENDER_DIR   = "../root"
-	PUBLICSH_DIR = "publish"
+	RENDER_DIR = "./root"
 )
 
-func main() {
+func Run(addr string) {
+	gostas.Mapping("/", "./publish")
+	gostas.Addr(addr).Run()
+
+}
+
+func Build() {
 	//publish
 	if !isExists(RENDER_DIR + "/" + PUBLICSH_DIR) {
 		err := os.Mkdir(RENDER_DIR+"/"+PUBLICSH_DIR, 0777)
@@ -23,26 +27,16 @@ func main() {
 		}
 	}
 	//render all files
-	var rf = new(gosk.RenderFactory)
+	var rf = new(RenderFactory)
 	rf.Render(RENDER_DIR)
 
 	//copy res
-	err := copyDir(RENDER_DIR+"/assets", RENDER_DIR+"/"+PUBLICSH_DIR+"/assets")
+	err := copyDir(RENDER_DIR+"/assets", PUBLICSH_DIR+"/assets")
 	if err != nil {
 		log.Println(err)
 	}
 	log.Println("blog process ok！")
-	rd := bufio.NewReader(os.Stdin)
-	rd.ReadLine()
 
-}
-
-func isExists(file string) bool {
-	_, err := os.Stat(file)
-	if err == nil {
-		return true
-	}
-	return os.IsExist(err)
 }
 
 func copyFile(src, dst string) (w int64, err error) {
@@ -68,11 +62,6 @@ func copyDir(source, dest string) (err error) {
 	if !fi.IsDir() {
 		return &CustomError{"Source is not a directory"}
 	}
-
-	// _, err = os.Open(dest)
-	// if !os.IsNotExist(err) {
-	// 	return &CustomError{"Destination already exists"}
-	// }
 
 	err = os.MkdirAll(dest, fi.Mode())
 	if err != nil {
