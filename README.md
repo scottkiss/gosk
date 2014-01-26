@@ -9,7 +9,7 @@
 
 ## Getting started
 install golang first, if you don't have,see [http://golang.org/doc/install](http://golang.org/doc/install)
-
+(Notice:go version must >=1.2)
 ```bash
 $ go get github.com/scottkiss/gosk
 ```
