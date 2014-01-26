@@ -8,6 +8,8 @@
 * Custom theme support 
 
 ## Getting started
+install golang first,see [http://golang.org/doc/install](http://golang.org/doc/install)
+
 ```bash
 $ go get github.com/scottkiss/gosk
 ```
