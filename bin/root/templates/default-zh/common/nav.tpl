@@ -1,3 +1,0 @@
-{{define "nav"}}
-
-{{end}}
