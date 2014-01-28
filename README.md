@@ -63,6 +63,11 @@ bin
  | - gosk                    #gosk  file
 ```
 
+## more themes
+[gosk-theme](https://github.com/scottkiss/gosk-theme)
+
+## who use gosk
+[cocosk](http://www.cocosk.com/)
 
 
 # 中文指南
@@ -71,7 +76,7 @@ bin
 ## 特点
 * 支持Markdown 
 * 支持自定义主题
-* 自带默认两个主题，支持代码高亮
+* 自带默认一个主题，支持代码高亮
 * 编译文章速度快
 * 更多特点,谁用谁知道^_^
 
@@ -129,6 +134,9 @@ bin
       | - pages.yml          #自定义页面配置文件
  | - gosk                    #gosk  执行文件
 ```
+
+## 更多主题
+gosk内置一个default主题，更多主题请前往[gosk-theme](https://github.com/scottkiss/gosk-theme)
 
 ## 使用gosk的站点
 [酷酷时空](http://www.cocosk.com/)
