@@ -43,7 +43,7 @@ func main() {
 	case "build":
 		gosk.Build()
 	case "run":
-		if args[1] != "" {
+		if argsLength == 2 {
 			httpAddr = args[1]
 		}
 		fmt.Println("Listen at ", httpAddr)

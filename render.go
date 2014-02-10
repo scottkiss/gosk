@@ -262,6 +262,7 @@ func (self *RenderFactory) RenderPosts(root string, yamls map[string]interface{}
 			//create post html file
 
 			trName := strings.TrimSuffix(fileName, ".md")
+            fmt.Println(trName)
 
 			//process url path => /articles/yyyy/MM/dd/{filename}.html
 			p := processArticleUrl(fi)
@@ -521,7 +522,7 @@ func processArticleFile(filePath, fileName string) (string, ArticleConfig, error
 	}
 
 	var tags []TagConfig
-	trName := strings.TrimRight(fileName, ".md")
+	trName := strings.TrimSuffix(fileName, ".md")
 	for i := 0; i < tagCount; i++ {
 		tagName, err := config.Get("tags[" + strconv.Itoa(i) + "]")
 		if err != nil {
