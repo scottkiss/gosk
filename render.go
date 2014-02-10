@@ -261,7 +261,7 @@ func (self *RenderFactory) RenderPosts(root string, yamls map[string]interface{}
 			mardownStr, fi, err := processArticleFile(root+POST_DIR+"/"+fileName, fileName)
 			//create post html file
 
-			trName := strings.TrimRight(fileName, ".md")
+			trName := strings.TrimSuffix(fileName, ".md")
 
 			//process url path => /articles/yyyy/MM/dd/{filename}.html
 			p := processArticleUrl(fi)
@@ -332,7 +332,7 @@ func (self *RenderFactory) RenderPages(root string, yamls map[string]interface{}
 	t := parseTemplate(root, PAGES_TPL, cfg)
 
 	for _, p := range pages {
-		p.Id = strings.TrimRight(p.Id, " ")
+		p.Id = strings.TrimSuffix(p.Id, " ")
 		filePath := root + "pages/" + p.Id + ".md"
 		if !isExists(filePath) {
 			log.Println(filePath + " is not found!")
