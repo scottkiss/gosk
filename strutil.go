@@ -9,7 +9,7 @@ func trimHTML(str string) string {
 	if str == "" {
 		return str
 	}
-	re, _ := regexp.Compile(`\<*+?(\>|$)`)
+	re, _ := regexp.Compile(`<[\s\S]+?(>|$)`)
 	newstr := re.ReplaceAllString(str, "")
 	return newstr
 }

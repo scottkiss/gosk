@@ -15,6 +15,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+    "regexp"
 )
 
 type RenderFactory struct{}
@@ -282,8 +283,8 @@ func (self *RenderFactory) RenderPosts(root string, yamls map[string]interface{}
 			htmlByte := blackfriday.MarkdownCommon([]byte(mardownStr))
 			//init other article infos
 			htmlStr := html.UnescapeString(string(htmlByte))
-			htmlStr = strings.Replace(htmlStr, "<pre><code", `<pre class="prettyprint linenums"`, -1)
-			htmlStr = strings.Replace(htmlStr, `</code>`, "", -1)
+            re := regexp.MustCompile(`<pre><code>([\s\S]*?)</code></pre>`)
+            htmlStr = re.ReplaceAllString(htmlStr, `<pre class="prettyprint linenums">${1}</pre>`)
 			fi.Content = htmlStr
 			fi.Link = p + trName + ".html"
 			//if abstract is empty,auto gen it
