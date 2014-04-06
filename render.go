@@ -541,8 +541,10 @@ func processArticleFile(filePath, fileName string) (string, ArticleConfig, error
 		log.Println(terr)
 	}
 	//log.Println(t)
+	
+	shortDate := t.UTC().Format("Jan 2, 2006")
 
-	arInfo := ArticleConfig{title, date, cat, tags, abstract, author, t, "", "", navBarList}
+	arInfo := ArticleConfig{title, date,shortDate, cat, tags, abstract, author, t, "", "", navBarList}
 
 	//log.Println(markdownStr)
 	return markdownStr, arInfo, nil

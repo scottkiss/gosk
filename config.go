@@ -7,6 +7,7 @@ import (
 type ArticleConfig struct {
 	Title    string
 	Date     string
+        ShortDate string
 	Category string
 	Tags     []TagConfig
 	Abstract string
