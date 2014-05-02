@@ -67,7 +67,10 @@ bin
 [gosk-theme](https://github.com/scottkiss/gosk-theme)
 
 ## who use gosk
-[cocosk](http://www.cocosk.com/)
+* [cocosk](http://www.cocosk.com/)
+* [http://leofen.me](http://leofen.me)
+
+If you are using gosk too,please tell me by email.
 
 
 # 中文指南
@@ -139,8 +142,10 @@ bin
 gosk内置一个default主题，更多主题请前往[gosk-theme](https://github.com/scottkiss/gosk-theme)
 
 ## 使用gosk的站点
-[酷酷时空](http://www.cocosk.com/)
+* [酷酷时空](http://www.cocosk.com/)
+* [http://leofen.me](http://leofen.me)
 
+如果你也使用gosk，如果不介意，通过邮件告诉我哦。
 
 ## License
 View the [LICENSE](https://github.com/scottkiss/gosk/blob/master/LICENSE) file
