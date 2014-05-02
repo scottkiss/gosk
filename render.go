@@ -38,6 +38,7 @@ const (
 const (
 	COMMON_HEADER_FILE = "header.tpl"
 	COMMON_FOOTER_FILE = "footer.tpl"
+	
 )
 
 var (
@@ -51,6 +52,9 @@ var (
 	pages           []*CustomPage
 	archives        map[string]*YearArchive
 	allArchive      YearArchives
+
+	NEWLY_ARTICLES_COUNT = 6
+	INDEX_ARTICLES_SHOW_COUNT = 15
 )
 
 func parseTemplate(root, tpl string, cfg *yaml.File) *template.Template {
@@ -144,8 +148,14 @@ func (self *RenderFactory) RenderIndex(root string, yamls map[string]interface{}
 		os.Exit(1)
 	}
 	defer fout.Close()
-
-	m := map[string]interface{}{"ar": articles, "nav": navBarList}
+	if len(articles)<INDEX_ARTICLES_SHOW_COUNT{
+		INDEX_ARTICLES_SHOW_COUNT = len(articles)
+	}
+	if len(articles)<NEWLY_ARTICLES_COUNT{
+		NEWLY_ARTICLES_COUNT = len(articles)
+	}
+	
+	m := map[string]interface{}{"ar": articles[:INDEX_ARTICLES_SHOW_COUNT-1], "nav": navBarList,"cats": categories,"newly":articles[:NEWLY_ARTICLES_COUNT-1]}
 	exErr := t.Execute(fout, m)
 	return exErr
 }
@@ -167,9 +177,9 @@ func (self *RenderFactory) RenderTag(root string, yamls map[string]interface{}) 
 	}
 	defer fout.Close()
 
-	generateTags()
+	
 	//log.Println(allTags)
-	m := map[string]interface{}{"tag": allTags, "nav": navBarList}
+	m := map[string]interface{}{"tag": allTags, "nav": navBarList,"cats": categories,"newly":articles[:NEWLY_ARTICLES_COUNT-1]}
 	exErr := t.Execute(fout, m)
 	return exErr
 }
@@ -192,9 +202,9 @@ func (self *RenderFactory) RenderCategories(root string, yamls map[string]interf
 	}
 	defer fout.Close()
 
-	generateCategories()
+	
 	//log.Println(categories)
-	m := map[string]interface{}{"cats": categories, "nav": navBarList}
+	m := map[string]interface{}{"cats": categories, "nav": navBarList,"newly":articles[:NEWLY_ARTICLES_COUNT-1]}
 	exErr := t.Execute(fout, m)
 	return exErr
 }
@@ -238,22 +248,19 @@ func (self *RenderFactory) RenderRss(root string, yamls map[string]interface{}) 
 	return exErr
 }
 
-//render posts pages
-func (self *RenderFactory) RenderPosts(root string, yamls map[string]interface{}) error {
+
+//pre process posts pages
+func (self *RenderFactory) PreProcessPosts(root string, yamls map[string]interface{}) error {
 	if !strings.HasSuffix(root, "/") {
 		root += "/"
 	}
-	generateNavBar(yamls)
+	yCfg := yamls["config.yml"]
+	var cfg = yCfg.(*yaml.File)
 	articles = make([]*ArticleConfig, 0, articleListSize)
 	fileInfos, err := ioutil.ReadDir(root + POST_DIR)
 	if err != nil {
-		log.Println("read posts dir error!")
+		log.Println(err)
 	}
-
-	yCfg := yamls["config.yml"]
-	var cfg = yCfg.(*yaml.File)
-	//log.Println(cfg.Get("title"))
-	t := parseTemplate(root, POSTS_TPL, cfg)
 
 	for _, fileInfo := range fileInfos {
 		if !fileInfo.IsDir() {
@@ -261,24 +268,12 @@ func (self *RenderFactory) RenderPosts(root string, yamls map[string]interface{}
 			fileName := fileInfo.Name()
 			mardownStr, fi, err := processArticleFile(root+POST_DIR+"/"+fileName, fileName)
 			//create post html file
-
-			trName := strings.TrimSuffix(fileName, ".md")
-            fmt.Println(trName)
-
-			//process url path => /articles/yyyy/MM/dd/{filename}.html
-			p := processArticleUrl(fi)
-			//create dir /yyyy/MM/dd
-			if !isExists(PUBLICSH_DIR + "/articles/" + p) {
-				os.MkdirAll(PUBLICSH_DIR+"/articles/"+p, 0777)
-			}
-			targetFile := PUBLICSH_DIR + "/articles/" + p + "/" + trName + ".html"
-			fout, err := os.Create(targetFile)
 			if err != nil {
-				log.Println("create file " + targetFile + " error!")
+				log.Println("preprocess article file error!")
 				os.Exit(1)
 			}
-			defer fout.Close()
-
+			trName := strings.TrimSuffix(fileName, ".md")
+          		p := processArticleUrl(fi)
 			//deal markdown
 			htmlByte := blackfriday.MarkdownCommon([]byte(mardownStr))
 			//init other article infos
@@ -289,9 +284,9 @@ func (self *RenderFactory) RenderPosts(root string, yamls map[string]interface{}
 			fi.Link = p + trName + ".html"
 			//if abstract is empty,auto gen it
 			if fi.Abstract == "" {
-				var limit int = 500
+				var limit int = 1000
 				rs := []rune(htmlStr)
-				if len(rs) < 500 {
+				if len(rs) < 1000 {
 					limit = len(rs)
 				}
 
@@ -308,10 +303,47 @@ func (self *RenderFactory) RenderPosts(root string, yamls map[string]interface{}
 			//sort by date
 			addAndSortArticles(fi)
 
-			t.Execute(fout, fi)
+			
 
 		}
 	}
+	generateCategories()
+	generateTags()
+	generateNavBar(yamls)
+	return nil
+}
+
+
+
+//render posts pages
+func (self *RenderFactory) RenderPosts(root string, yamls map[string]interface{}) error {
+	if !strings.HasSuffix(root, "/") {
+		root += "/"
+	}
+	
+
+	yCfg := yamls["config.yml"]
+	var cfg = yCfg.(*yaml.File)
+	//log.Println(cfg.Get("title"))
+	t := parseTemplate(root, POSTS_TPL, cfg)	
+			for _,fileInfo := range articles {
+				//create dir /yyyy/MM/dd
+				p := processArticleUrl(*fileInfo)
+				if !isExists(PUBLICSH_DIR + "/articles/" + p) {
+					os.MkdirAll(PUBLICSH_DIR+"/articles/"+p, 0777)
+				}
+				targetFile := PUBLICSH_DIR + "/articles/" + fileInfo.Link
+				fout, err := os.Create(targetFile)
+				if err != nil {
+					log.Println("create file " + targetFile + " error!")
+					os.Exit(1)
+				}
+				defer fout.Close()
+				m := map[string]interface{}{"fi": fileInfo,"nav": navBarList, "cats": categories,"newly":articles[:NEWLY_ARTICLES_COUNT-1]}
+				t.Execute(fout, m)
+			}
+		
+	
 	return nil
 }
 
@@ -379,7 +411,7 @@ func (self *RenderFactory) RenderPages(root string, yamls map[string]interface{}
 		}
 		defer fout.Close()
 
-		m := map[string]interface{}{"p": p, "nav": navBarList}
+		m := map[string]interface{}{"p": p, "nav": navBarList,"cats": categories,"newly":articles[:NEWLY_ARTICLES_COUNT-1]}
 		t.Execute(fout, m)
 	}
 
@@ -405,7 +437,7 @@ func (self *RenderFactory) RenderArchives(root string, yamls map[string]interfac
 
 	generateArchive()
 	//log.Println(allArchive)
-	m := map[string]interface{}{"archives": allArchive, "nav": navBarList}
+	m := map[string]interface{}{"archives": allArchive, "nav": navBarList,"cats": categories,"newly":articles[:NEWLY_ARTICLES_COUNT-1]}
 	exErr := t.Execute(fout, m)
 	return exErr
 
@@ -541,8 +573,10 @@ func processArticleFile(filePath, fileName string) (string, ArticleConfig, error
 		log.Println(terr)
 	}
 	//log.Println(t)
+	
+	shortDate := t.UTC().Format("Jan 2, 2006")
 
-	arInfo := ArticleConfig{title, date, cat, tags, abstract, author, t, "", "", navBarList}
+	arInfo := ArticleConfig{title, date,shortDate, cat, tags, abstract, author, t, "", "", navBarList}
 
 	//log.Println(markdownStr)
 	return markdownStr, arInfo, nil
@@ -621,11 +655,12 @@ func generatePages(yamls map[string]interface{}) {
 func (self *RenderFactory) Render(root string) {
 	yp := new(YamlParser)
 	yamlData := yp.parse(root)
+	self.PreProcessPosts(root,yamlData)
 	self.RenderPosts(root, yamlData)
+	self.RenderCategories(root, yamlData)	
 	self.RenderIndex(root, yamlData)
 	self.RenderRss(root, yamlData)
-	self.RenderTag(root, yamlData)
-	self.RenderCategories(root, yamlData)
+	self.RenderTag(root, yamlData)	
 	self.RenderArchives(root, yamlData)
 	self.RenderPages(root, yamlData)
 }
