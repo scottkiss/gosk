@@ -155,7 +155,7 @@ func (self *RenderFactory) RenderIndex(root string, yamls map[string]interface{}
 		NEWLY_ARTICLES_COUNT = len(articles)
 	}
 	
-	m := map[string]interface{}{"ar": articles[:INDEX_ARTICLES_SHOW_COUNT-1], "nav": navBarList,"cats": categories,"newly":articles[:NEWLY_ARTICLES_COUNT-1]}
+	m := map[string]interface{}{"ar": articles[:INDEX_ARTICLES_SHOW_COUNT], "nav": navBarList,"cats": categories,"newly":articles[:NEWLY_ARTICLES_COUNT]}
 	exErr := t.Execute(fout, m)
 	return exErr
 }
@@ -280,6 +280,7 @@ func (self *RenderFactory) PreProcessPosts(root string, yamls map[string]interfa
 			htmlStr := html.UnescapeString(string(htmlByte))
             re := regexp.MustCompile(`<pre><code>([\s\S]*?)</code></pre>`)
             htmlStr = re.ReplaceAllString(htmlStr, `<pre class="prettyprint linenums">${1}</pre>`)
+            
 			fi.Content = htmlStr
 			fi.Link = p + trName + ".html"
 			//if abstract is empty,auto gen it
