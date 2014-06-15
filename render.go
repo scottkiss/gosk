@@ -280,7 +280,7 @@ func (self *RenderFactory) PreProcessPosts(root string, yamls map[string]interfa
 			htmlStr := html.UnescapeString(string(htmlByte))
             re := regexp.MustCompile(`<pre><code>([\s\S]*?)</code></pre>`)
             htmlStr = re.ReplaceAllString(htmlStr, `<pre class="prettyprint linenums">${1}</pre>`)
-            
+
 			fi.Content = htmlStr
 			fi.Link = p + trName + ".html"
 			//if abstract is empty,auto gen it
@@ -595,11 +595,23 @@ func addAndSortArticles(arInfo ArticleConfig) {
 	//log.Println(len(articles))
 }
 
-func unescaped(str string) interface{} { return template.HTML(str) }
+func unescaped(str string) interface{} { 
+	re := regexp.MustCompile(`<pre class="prettyprint linenums">([\s\S]*?)</pre>`)
+	str = re.ReplaceAllStringFunc(str,xmlEscapString)
+	return template.HTML(str) 
+
+}
 func xmlHeader(blank string) string {
 	return blank + `<?xml version="1.0" encoding="utf-8"?>`
 }
-
+func xmlEscapString(str string) string{
+	str = strings.Replace(str,`<pre class="prettyprint linenums">`,"@@PRE_BEGIN",-1)
+	str = strings.Replace(str,`</pre>`,"@@PRE_END",-1)
+	str = template.HTMLEscapeString(str)
+	str = strings.Replace(str,"@@PRE_BEGIN",`<pre class="prettyprint linenums">`,-1)
+	str = strings.Replace(str,"@@PRE_END",`</pre>`,-1)
+	return str
+}
 func generateNavBar(yamls map[string]interface{}) {
 	yCfg := yamls["nav.yml"]
 	var cfg = yCfg.(*yaml.File)
