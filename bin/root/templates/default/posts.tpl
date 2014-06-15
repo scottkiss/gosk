@@ -15,9 +15,9 @@
 <div class="main">
 	<div class="main-inner">
 		 <div id="article-title">
-		 	<a href="/{{.Link}}">{{.Title}}</a>
+		 	<a href="/{{.fi.Link}}">{{.fi.Title}}</a>
 		 </div>
-		 <div id="article-meta">Author {{.Author}}  | Posted {{.Date}} </div>
+		 <div id="article-meta">Author {{.fi.Author}}  | Posted {{.fi.Date}} </div>
 
 		  <div id="article-tags">
 		  {{range .Tags}}
@@ -25,7 +25,7 @@
 		  {{.Name}}</a> 
 		  {{end}}
 		  </div>
-		 <div id="article-content"> {{.Content|unescaped}} </div>
+		 <div id="article-content"> {{.fi.Content|unescaped}} </div>
 		<hr/>
 	<div class="comments">
 	 <h3>Comments</h3>
@@ -50,23 +50,5 @@
 </div>
 
 <script type="text/javascript" src="/assets/themes/{{"theme"|get}}/jquery.js"></script>
-<script type="text/javascript">
- 		$(function(){
- 			$('.prettyprint').each(function(){
- 				$(this).html(htmlEncode($(this).html()));
- 			});
- 		});
-		function htmlEncode(str){
-  			var s = "";
-  			if (str.length == 0) return "";
-  				s = str.replace(/&/g, "&gt;");
-  				s = s.replace(/</g, "&lt;");
-  				s = s.replace(/>/g, "&gt;");
-	  			s = s.replace(/ /g, "&nbsp;");
-	  			s = s.replace(/\'/g, "&#39;");
-	 			s = s.replace(/\"/g, "&quot;"); 
-	  			s = s.replace(/\n/g, "<br>");
-  				return s;   
-			}
- </script>
+
 {{template "footer"}}
